@@ -17,10 +17,10 @@ document.body.appendChild(progressBar);
 
 // Fungsi untuk membuat kembang api
 function createFirework(x, y, special = false) {
-    const colors = special ? 
+    const colors = special ?
         ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'] :
         ['#ff4747', '#ffbe47', '#47ff74', '#4775ff', '#d647ff', '#ff47d6', '#47ffdd', '#ff6347'];
-    
+
     const firework = {
         x,
         y: canvas.height,
@@ -32,7 +32,7 @@ function createFirework(x, y, special = false) {
     };
 
     const particleCount = special ? 150 : 100;
-    
+
     for (let i = 0; i < particleCount; i++) {
         firework.particles.push({
             x,
@@ -118,7 +118,7 @@ function drawFireworks() {
                 const distance = Math.random() * 5;
                 const sparkleX = firework.x + Math.cos(angle) * distance;
                 const sparkleY = firework.y + 15 + Math.sin(angle) * distance;
-                
+
                 ctx.beginPath();
                 ctx.arc(sparkleX, sparkleY, 1, 0, Math.PI * 2);
                 ctx.fillStyle = `hsla(${Math.random() * 360}, 100%, 70%, ${Math.random()})`;
@@ -129,7 +129,7 @@ function drawFireworks() {
                 ctx.strokeStyle = p.color;
                 ctx.globalAlpha = p.opacity;
                 ctx.lineWidth = p.size;
-                
+
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(
@@ -137,7 +137,7 @@ function drawFireworks() {
                     p.y - Math.sin(p.angle) * p.length
                 );
                 ctx.stroke();
-                
+
                 if (Math.random() > 0.8) {
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
@@ -169,7 +169,7 @@ function createExplodingText(x, y, text1, text2) {
 
             // Menambahkan letter-spacing pada setiap karakter
             span.style.letterSpacing = "3px";  // Menambahkan jarak antar huruf (ubah sesuai kebutuhan)
-            
+
             lineDiv.appendChild(span);
 
             gsap.fromTo(
@@ -288,6 +288,73 @@ function showPopUp() {
             createFirework(randomX, randomY, true);
         }, 2500);
     }, 1000);
+
+    // Floating "Noted!" and logo section below the popup
+    const notedSection = document.createElement("div");
+    notedSection.className = "noted-section";
+
+    const notedText = document.createElement("span");
+    notedText.className = "noted-text";
+    notedText.textContent = "Di Baca ya Love!";
+
+    const notedLogo = document.createElement("img");
+    notedLogo.className = "noted-logo";
+    notedLogo.src = "/images/noted.png";  // Replace with actual logo image path
+
+    notedSection.appendChild(notedText);
+    notedSection.appendChild(notedLogo);
+    document.body.appendChild(notedSection);
+
+    // Make the "Noted!" section clickable
+    notedSection.addEventListener("click", () => {
+        // Show the scrapbook modal when clicked
+        showScrapbookModal();
+    });
+
+    // Create scrapbook-like romantic message modal
+    const messageModal = document.createElement("div");
+    messageModal.className = "message-modal";
+    messageModal.style.display = "none"; // Initially hidden
+    const romanticMessage = document.createElement("div");
+    romanticMessage.className = "romantic-message";
+    romanticMessage.innerHTML = `
+        <p>✨ Kamu itu bener-bener segalanya buat aku! Aku nggak pernah nyangka bisa nemuin seseorang yang bisa bikin aku ngerasa diterima dan dicintai dengan cara yang kayak gini. Kamu luar biasa banget! ✨</p>
+        <p>❤️ Kadang aku mikir, apakah aku beruntung atau nggak, tapi yang pasti aku ngerasa super beruntung punya kamu. Setiap hari yang kita lewatin bareng, rasanya dunia ini jadi lebih cerah. ❤️</p>
+        <p>🌹 Makasih banyak ya, udah sabar dan terus ada buat aku meskipun kadang aku nggak ngerti apa yang kamu butuhin. Tapi kamu selalu di samping aku, dan itu adalah hal terbaik yang pernah terjadi dalam hidup aku. 🌹</p>
+        <p>✨ Aku cuma pengen kamu tau, setiap detik, setiap menit, aku sayang banget sama kamu. Kadang rasanya nggak bisa diungkapin, karena sayang aku tuh lebih dari sekedar kata-kata. Kamu itu lebih dari segalanya buat aku. ✨</p>
+        <p>❤️ Aku janji, nggak akan pernah berhenti mencintaimu. Waktu terus berjalan, tapi kamu akan selalu ada di hati aku, selamanya. ❤️</p>
+        <p>🌹 Bersama kamu, aku ngerasa lebih kuat, lebih berarti, dan lebih bahagia. Kita nggak sempurna, tapi kita saling melengkapi, dan itu yang bikin hubungan kita beda dari yang lain. Kamu, aku, dan kita. Selalu bareng, selamanya. 🌹</p>
+        <p>🌹 Aku beneran Sayang banget sama kamu, Najmita Zahira Dirgantoro. Kamu adalah orang yang sangat penting dalam hidup aku, dan aku nggak sabar buat terus jalanin hidup ini sama kamu. 🌹</p>
+    `;
+
+    messageModal.appendChild(romanticMessage);
+    document.body.appendChild(messageModal);
+
+    // Function to show the scrapbook modal
+    // Function to show the scrapbook modal
+    function showScrapbookModal() {
+        messageModal.style.display = "block";  // Make the modal visible
+
+        // Create the close button (X)
+        const closeButton = document.createElement("button");
+        closeButton.className = "close-button";
+        closeButton.textContent = "X";
+
+        // Add the close button to the modal
+        messageModal.appendChild(closeButton);
+
+        // Event listener to close the modal when the button is clicked
+        closeButton.addEventListener("click", () => {
+            messageModal.style.display = "none";  // Hide modal when X is clicked
+        });
+    }
+
+    // Close the modal when clicked outside of it (optional)
+    messageModal.addEventListener("click", (e) => {
+        if (e.target === messageModal) {
+            messageModal.style.display = "none";  // Hide modal when clicking outside
+        }
+    });
 }
 
 // Event listener untuk klik canvas
@@ -316,7 +383,7 @@ canvas.addEventListener("click", (e) => {
                 createFirework(randomX, randomY, true);
             }, i * 200);
         }
-        
+
         // Wait for 3 seconds before showing the popup
         setTimeout(() => {
             showPopUp(); // Show the popup after the delay

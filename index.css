@@ -282,3 +282,121 @@ canvas {
         text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6;
     }
 }
+
+.noted-section {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 9998;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.noted-text {
+    color: #FF6347;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.noted-logo {
+    width: 40px;
+    height: 40px;
+}
+
+.message-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: wheat;
+    border: 2px solid #ff6347;
+    padding: 30px;  /* Increased padding */
+    border-radius: 15px;  /* Rounded corners for better look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 9999;
+    width: 100%;  /* Control width */
+    max-width: 300px;  /* Max width to prevent it from becoming too wide */
+    text-align: center;
+    height: 100%;
+    display: none;
+    overflow-y: auto;
+    max-height: 70%;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.romantic-message {
+    border: 2px dashed #ff6347;
+    padding: 16px;  /* More padding inside the romantic message box */
+    border-radius: 15px;
+    background: #fff;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin: 10px 0;  /* Space between the box and content */
+}
+
+.romantic-message p {
+    margin: 15px 0;
+}
+
+.romantic-message:before {
+    content: "💌";
+    font-size: 30px;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .message-modal {
+        width: 85%;  /* Make the modal slightly larger on smaller screens */
+        padding: 20px;  /* Reduced padding on smaller screens */
+    }
+
+    .noted-text {
+        font-size: 20px;
+    }
+
+    .noted-logo {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Style for the close button (X) */
+.close-button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: red;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
