@@ -285,7 +285,7 @@ canvas {
 
 .noted-section {
     position: fixed;
-    bottom: 100px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 24px;
